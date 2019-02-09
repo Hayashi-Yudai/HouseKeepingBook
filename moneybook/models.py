@@ -21,4 +21,4 @@ class ExpenditureDetail(models.Model):
     category = models.CharField(max_length=10, choices=category_choices)
 
     def __str__(self):
-        return self.money_use + ' ￥' + self.cost
+        return self.money_use + ' ￥' + str(self.cost)

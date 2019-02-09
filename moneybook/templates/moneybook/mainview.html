@@ -5,24 +5,61 @@
     <meta charset="utf-8">
     <title>MoneyBook</title>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'moneybook/main_style.css' %}">
+    <script>
+      $(function () {
+        let dateFormat = 'yy-mm-dd';
+        $('#date_choice').datepicker({
+        dateFormat: dateFormat
+        });
+      });
+    </script>
   </head>
   <body>
     <div class="container">
       <div class="row top-bg">
         <div class="col-md-8 mt-2 mb-3">
-          <h1>2019年</h1>
+          <h1>{{ year}}年　{{ month }}月</h1>
         </div>
         <div class="col-md-2 text-center mt-4">
-          <h4> << 1月</h4>
+          <a href="/{{ prev_year}}/{{ prev_month }}">
+            <h4> << {{ prev_month }}月</h4>
+          </a>
         </div>
         <div class="col-md-2 text-center mt-4">
-          <h4>3月 >> </h4>
+          <a href="/{{ next_year }}/{{ next_month }}">
+            <h4>{{ next_month }}月 >> </h4>
+          </a>
         </div>
       </div>
       <div class="row">
         <div class="col-md-6 mt-2">
-          <h2>支出の詳細</h2>
+          <p>
+            <h2>支出の登録</h2>
+          </p>
+          <form action="" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              {{ form.non_field_errors}}
+              <div class="form-inline">
+                {{ form.used_date.label_tag }}&nbsp
+                {{ form.used_date }}
+                {{ form.cost.label_tag}}&nbsp
+                {{ form.cost }}
+                {{ form.category.label_tag}}&nbsp
+                {{ form.category }}
+              </div>
+              <hr>
+              <div class="form-inline">
+                {{ form.money_use.label_tag}}&nbsp
+                {{ form.money_use }}
+                <input type="submit" class="btn btn-primary" value="登録">
+              </div>
+            </div>
+          </form>
         </div>
       </div>
       <div class="row">
@@ -33,7 +70,6 @@
           <h2>支出額の推移</h2>
         </div>
       </div>
-
     </div>
   </body>
 </html>
