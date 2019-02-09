@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang='ja' dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>MoneyBook</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'moneybook/main_style.css' %}">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row top-bg">
+        <div class="col-md-8 mt-2 mb-3">
+          <h1>2019年</h1>
+        </div>
+        <div class="col-md-2 text-center mt-4">
+          <h4> << 1月</h4>
+        </div>
+        <div class="col-md-2 text-center mt-4">
+          <h4>3月 >> </h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mt-2">
+          <h2>支出の詳細</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mt-2">
+          <h2>支出履歴</h2>
+        </div>
+        <div class="col-md-6 mt-2">
+          <h2>支出額の推移</h2>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
