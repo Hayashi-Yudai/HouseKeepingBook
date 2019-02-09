@@ -42,8 +42,9 @@ class MainView(View):
 
     def post(self, request, year=TODAY[0], month=TODAY[1]):
         data = request.POST
+        form = ExpenditureForm(data)
 
-        if 'add' in data.keys():
+        if 'add' in data.keys() and form.is_valid():
             used_date = data['used_date']
             cost = data['cost']
             money_use = data['money_use']

@@ -1,4 +1,6 @@
 from django import forms
+from django.utils import timezone
+
 
 category_choices = (
     ('food', '食費'),    # DB値 : 人に読みやすい表示
@@ -54,3 +56,9 @@ class ExpenditureForm(forms.Form):
             }
         )
     )
+
+    def clean_cost(self):
+        cost = self.cleaned_data.get('cost')
+        if int(cost) < 1000:
+            self.add_error('cost', 'エラー')
+        return cost

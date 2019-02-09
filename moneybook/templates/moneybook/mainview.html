@@ -46,12 +46,14 @@
           <form action="" method="post">
             {% csrf_token %}
             <div class="form-group">
-              {{ form.non_field_errors}}
+              {{ form.errors }}
               <div class="form-inline">
                 {{ form.used_date.label_tag }}&nbsp
                 {{ form.used_date }}
+                {{ form.used_date.errors }}
                 {{ form.cost.label_tag}}&nbsp
                 {{ form.cost }}
+                {{ form.cost.errors }}
                 {{ form.category.label_tag}}&nbsp
                 {{ form.category }}
               </div>
