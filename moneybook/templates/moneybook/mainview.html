@@ -4,11 +4,14 @@
   <head>
     <meta charset="utf-8">
     <title>MoneyBook</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'moneybook/main_style.css' %}">
+    <script type="text/javascript" src="{% static 'moneybook/js/data.js' %}"></script>
+    <script type="text/javascript" src="{% static 'moneybook/js/draw.js' %}"></script>
     <script>
       $(function () {
         let dateFormat = 'yy-mm-dd';
@@ -22,10 +25,10 @@
     <div class="container">
       <div class="row top-bg">
         <div class="col-md-8 mt-2 mb-3">
-          <h1>{{ year}}年　{{ month }}月</h1>
+          <h1>{{ year }}年　{{ month }}月</h1>
         </div>
         <div class="col-md-2 text-center mt-4">
-          <a href="/{{ prev_year}}/{{ prev_month }}">
+          <a href="/{{ prev_year }}/{{ prev_month }}">
             <h4> << {{ prev_month }}月</h4>
           </a>
         </div>
@@ -56,18 +59,53 @@
               <div class="form-inline">
                 {{ form.money_use.label_tag}}&nbsp
                 {{ form.money_use }}
-                <input type="submit" class="btn btn-primary" value="登録">
+                <input type="submit" name='add' class="btn btn-primary" value="登録">
               </div>
             </div>
           </form>
+        </div>
+        <div class="col-md-6 mt-5">
+          <h2>今月の総支出</h2>
+          <div class="text-center total_cost">
+            <h3 class="total">{{ total_cost }}円</h2>
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="col-md-6 mt-2">
           <h2>支出履歴</h2>
+          <table>
+              <tr>
+                  <th>日付</th>
+                  <th>用途</th>
+                  <th>カテゴリー</th>
+                  <th>金額</th>
+                  <th>削除</th>
+              </tr>
+              {% for m in money %}
+              <tr>
+                  <td>{{ m.used_date.month }}/{{ m.used_date.day }}</td>
+                  <td>{{ m.money_use }}</td>
+                  <td>{{ m.get_category_display }}</td>
+                  <td>{{ m.cost }}円</td>
+                  <td>
+                      <form action="" method="post">
+                          {% csrf_token %}
+                          {{ form_delete.as_table }}
+                          <input type="hidden" name="used_date" value={{ m.used_date }}>
+                          <input type="hidden" name="money_use" value={{ m.money_use }}>
+                          <input type="hidden" name="cost" value={{ m.cost }}>
+                          <input type="submit" name="delete" value="削除">
+                      </form>
+                  </td>
+              </tr>
+              {% endfor %}
+          </table>
         </div>
         <div class="col-md-6 mt-2">
           <h2>支出額の推移</h2>
+          <canvas id="data"></canvas>
+          <script type="text/javascript" src="{% static 'moneybook/js/draw.js' %}"></script>
         </div>
       </div>
     </div>
