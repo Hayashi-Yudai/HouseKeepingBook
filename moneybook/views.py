@@ -76,7 +76,36 @@ class MainView(View):
                 money_use__iexact=money_use
             ).delete()
 
-        return redirect(to=f'/{year}/{month}')
+            return redirect(to=f'/{year}/{month}')
+
+        money = ExpenditureDetail.objects.filter(
+            used_date__year=year,
+            used_date__month=month
+        ).order_by('used_date')
+
+        total = 0
+        for m in money:
+            total += m.cost
+
+        next_year, next_month = get_next(year, month)
+        prev_year, prev_month = get_prev(year, month)
+
+        context = {
+            'year' : year,
+            'month' : month,
+            'next_year' : next_year,
+            'next_month' : next_month,
+            'prev_year' : prev_year,
+            'prev_month' : prev_month,
+            'total_cost' : total,
+            'money' : money,
+            'form' : form,
+        }
+
+        self.draw_graph(year, month)
+
+        return render(request, 'moneybook/mainview.html', context)
+        #return redirect(to=f'/{year}/{month}')
 
     def draw_graph(self, year, month):
         money = ExpenditureDetail.objects.filter(used_date__year=year,

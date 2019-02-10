@@ -43,17 +43,24 @@
           <p>
             <h2>支出の登録</h2>
           </p>
-          <form action="" method="post">
+          <form action="" method="post" autocomplete="off">
             {% csrf_token %}
+            {% if form.errors %}
+              {% for errors in form.errors.values %}
+                {% for error in errors %}
+                  <div class="alert alert-danger alert-dismissable alert-link" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                    {{ error }}
+                  </div>
+                {% endfor %}
+              {% endfor %}
+            {% endif %}
             <div class="form-group">
-              {{ form.errors }}
               <div class="form-inline">
                 {{ form.used_date.label_tag }}&nbsp
                 {{ form.used_date }}
-                {{ form.used_date.errors }}
                 {{ form.cost.label_tag}}&nbsp
                 {{ form.cost }}
-                {{ form.cost.errors }}
                 {{ form.category.label_tag}}&nbsp
                 {{ form.category }}
               </div>
@@ -78,11 +85,11 @@
           <h2>支出履歴</h2>
           <table>
               <tr>
-                  <th>日付</th>
-                  <th>用途</th>
-                  <th>カテゴリー</th>
-                  <th>金額</th>
-                  <th>削除</th>
+                  <th width="5%">日付</th>
+                  <th width="22%">用途</th>
+                  <th width="12%">カテゴリー</th>
+                  <th width="10%">金額</th>
+                  <th width="5%">削除</th>
               </tr>
               {% for m in money %}
               <tr>

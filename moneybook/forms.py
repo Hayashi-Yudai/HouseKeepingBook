@@ -57,8 +57,8 @@ class ExpenditureForm(forms.Form):
         )
     )
 
-    def clean_cost(self):
-        cost = self.cleaned_data.get('cost')
-        if int(cost) < 1000:
-            self.add_error('cost', 'エラー')
-        return cost
+    def clean_used_date(self):
+        used_date = self.cleaned_data.get('used_date')
+        if used_date > timezone.now().date():
+            self.add_error('used_date', '翌日以降の支出は登録できません')
+        return used_date
