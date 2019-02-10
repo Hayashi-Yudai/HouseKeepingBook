@@ -1,3 +1,7 @@
+body{
+  font-family: Meiryo;
+}
+
 table{
   border-collapse:collapse;
   margin:0 0;

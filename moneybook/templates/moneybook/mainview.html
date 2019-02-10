@@ -48,8 +48,7 @@
             {% if form.errors %}
               {% for errors in form.errors.values %}
                 {% for error in errors %}
-                  <div class="alert alert-danger alert-dismissable alert-link" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                  <div class="alert alert-danger" role="alert">
                     {{ error }}
                   </div>
                 {% endfor %}
@@ -57,16 +56,12 @@
             {% endif %}
             <div class="form-group">
               <div class="form-inline">
-                {{ form.used_date.label_tag }}&nbsp
                 {{ form.used_date }}
-                {{ form.cost.label_tag}}&nbsp
                 {{ form.cost }}
-                {{ form.category.label_tag}}&nbsp
                 {{ form.category }}
               </div>
               <hr>
               <div class="form-inline">
-                {{ form.money_use.label_tag}}&nbsp
                 {{ form.money_use }}
                 <input type="submit" name='add' class="btn btn-primary" value="登録">
               </div>

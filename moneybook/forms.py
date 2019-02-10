@@ -1,5 +1,6 @@
 from django import forms
 from django.utils import timezone
+import datetime
 
 
 category_choices = (
@@ -16,40 +17,39 @@ category_choices = (
 
 class ExpenditureForm(forms.Form):
     used_date = forms.DateField(
-        label='日付',
         widget=forms.TextInput(
             attrs={
                 'class' : 'form-control mr-2',
                 'id' : 'date_choice',
-                'style' : 'width:120px'
+                'style' : 'width:120px',
+                'placeholder' : '日付',
             }
         )
     )
 
     cost = forms.IntegerField(
-        label='金額',
         widget=forms.TextInput(
             attrs={
                 'class' : 'form-control mr-2',
-                'style' : 'width:80px'
+                'style' : 'width:80px',
+                'placeholder' : '金額',
             }
         )
     )
 
     money_use = forms.CharField(
         max_length=200,
-        label='用途',
         widget=forms.TextInput(
             attrs={
                 'class' : 'form-control mr-5',
-                'style' : 'width:370px'
+                'style' : 'width:400px',
+                'placeholder' : '用途を入力してください',
             }
         )
     )
 
     category = forms.ChoiceField(
         choices=category_choices,
-        label='カテゴリー',
         widget=forms.Select(
             attrs={
                 'class' : 'form-control'
@@ -59,6 +59,7 @@ class ExpenditureForm(forms.Form):
 
     def clean_used_date(self):
         used_date = self.cleaned_data.get('used_date')
-        if used_date > timezone.now().date():
+        now = (timezone.now() + datetime.timedelta(hours=9)).date()
+        if used_date > now:
             self.add_error('used_date', '翌日以降の支出は登録できません')
         return used_date
