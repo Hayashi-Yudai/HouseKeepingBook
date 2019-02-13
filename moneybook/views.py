@@ -44,20 +44,49 @@ class MainView(View):
         data = request.POST
         form = ExpenditureForm(data)
 
-        if 'add' in data.keys() and form.is_valid():
-            used_date = data['used_date']
-            cost = data['cost']
-            money_use = data['money_use']
-            category_choices = data['category']
+        if 'add' in data.keys():
+            if form.is_valid():
+                used_date = data['used_date']
+                cost = data['cost']
+                money_use = data['money_use']
+                category_choices = data['category']
 
-            used_date = timezone.datetime.strptime(used_date, '%Y-%m-%d')
+                used_date = timezone.datetime.strptime(used_date, '%Y-%m-%d')
 
-            ExpenditureDetail.objects.create(
-                used_date = used_date,
-                cost = cost,
-                money_use = money_use,
-                category = category_choices
-            )
+                ExpenditureDetail.objects.create(
+                    used_date = used_date,
+                    cost = cost,
+                    money_use = money_use,
+                    category = category_choices
+                )
+
+            money = ExpenditureDetail.objects.filter(
+                used_date__year=year,
+                used_date__month=month
+            ).order_by('used_date')
+
+            total = 0
+            for m in money:
+                total += m.cost
+
+            next_year, next_month = get_next(year, month)
+            prev_year, prev_month = get_prev(year, month)
+
+            context = {
+                'year' : year,
+                'month' : month,
+                'next_year' : next_year,
+                'next_month' : next_month,
+                'prev_year' : prev_year,
+                'prev_month' : prev_month,
+                'total_cost' : total,
+                'money' : money,
+                'form' : form,
+            }
+
+            self.draw_graph(year, month)
+
+            return render(request, 'moneybook/mainview.html', context)
 
         elif 'delete' in data.keys():
             used_date = data['used_date']
@@ -77,35 +106,6 @@ class MainView(View):
             ).delete()
 
             return redirect(to=f'/{year}/{month}')
-
-        money = ExpenditureDetail.objects.filter(
-            used_date__year=year,
-            used_date__month=month
-        ).order_by('used_date')
-
-        total = 0
-        for m in money:
-            total += m.cost
-
-        next_year, next_month = get_next(year, month)
-        prev_year, prev_month = get_prev(year, month)
-
-        context = {
-            'year' : year,
-            'month' : month,
-            'next_year' : next_year,
-            'next_month' : next_month,
-            'prev_year' : prev_year,
-            'prev_month' : prev_month,
-            'total_cost' : total,
-            'money' : money,
-            'form' : form,
-        }
-
-        self.draw_graph(year, month)
-
-        return render(request, 'moneybook/mainview.html', context)
-        #return redirect(to=f'/{year}/{month}')
 
     def draw_graph(self, year, month):
         money = ExpenditureDetail.objects.filter(used_date__year=year,

@@ -41,7 +41,7 @@ class ExpenditureForm(forms.Form):
         max_length=200,
         widget=forms.TextInput(
             attrs={
-                'class' : 'form-control mr-5',
+                'class' : 'form-control mr-3',
                 'style' : 'width:400px',
                 'placeholder' : '用途を入力してください',
             }

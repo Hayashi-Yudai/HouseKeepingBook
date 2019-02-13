@@ -99,7 +99,9 @@
                           <input type="hidden" name="used_date" value={{ m.used_date }}>
                           <input type="hidden" name="money_use" value={{ m.money_use }}>
                           <input type="hidden" name="cost" value={{ m.cost }}>
-                          <input type="submit" name="delete" value="削除">
+                          <button class="btn btn-outline-danger" type="submit" name="delete">
+                            削除
+                          </button>
                       </form>
                   </td>
               </tr>
@@ -108,8 +110,8 @@
         </div>
         <div class="col-md-6 mt-2">
           <h2>支出額の推移</h2>
-            <canvas id="data"></canvas>
-            <script type="text/javascript" src="{% static 'moneybook/js/draw.js' %}"></script>
+          <canvas id="data"></canvas>
+          <script type="text/javascript" src="{% static 'moneybook/js/draw.js' %}"></script>
         </div>
       </div>
     </div>
