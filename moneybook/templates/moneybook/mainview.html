@@ -79,23 +79,23 @@
         <div class="col-md-6 mt-2">
           <h2>支出履歴</h2>
           <table>
-            <thead>
+            <thead class="pay_histry">
               <tr>
-                  <th width="5%">日付</th>
-                  <th width="22%">用途</th>
-                  <th width="12%">カテゴリー</th>
-                  <th width="10%">金額</th>
-                  <th width="5%">削除</th>
+                  <th class="date">日付</th>
+                  <th class="use">用途</th>
+                  <th class="category">カテゴリー</th>
+                  <th class="cost">金額</th>
+                  <th class="delete">削除</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="pay_histry">
               {% for m in money %}
               <tr>
-                  <td>{{ m.used_date.month }}/{{ m.used_date.day }}</td>
-                  <td>{{ m.money_use }}</td>
-                  <td>{{ m.get_category_display }}</td>
-                  <td>{{ m.cost }}円</td>
-                  <td>
+                  <td class="date">{{ m.used_date.month }}/{{ m.used_date.day }}</td>
+                  <td class="use">{{ m.money_use }}</td>
+                  <td class="category">{{ m.get_category_display }}</td>
+                  <td class="cost">{{ m.cost }}円</td>
+                  <td class="delete">
                       <form action="" method="post">
                           {% csrf_token %}
                           {{ form_delete.as_table }}

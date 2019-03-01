@@ -2,28 +2,45 @@ body{
   font-family: Meiryo;
 }
 
-table{
+table.pay_histry{
+  table-layout: fixed;
   border-collapse:collapse;
   margin:0 0;
 }
 th{
   color:#005ab3;
 }
-td{
+td.pay_histry{
   border-bottom:1px dashed #999;
 }
-th,tr:last-child td{
+th, tr:last-child td{
   border-bottom:2px solid #005ab3;
 }
-td,th{
+td.pay_histry, th.pay_histry{
   padding:10px;
-  width: 200px;
 }
 
-thead, tbody {
+.date{
+  width: 80px;
+}
+.use{
+  width: 400px;
+  table-layout: fixed;
+}
+.category{
+  width: 100px;
+}
+.cost{
+  width: 120px;
+}
+.delete{
+  width: 80px;
+}
+
+thead.pay_histry, tbody.pay_histry {
   display: block;
 }
-tbody {
+tbody.pay_histry {
   overflow-x: hidden;
   overflow-y: scroll;
   height: 550px;
