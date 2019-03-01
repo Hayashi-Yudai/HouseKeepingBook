@@ -1,1 +1,3 @@
 django-env/
+*.sqlite3
+moneybook/static/moneybook/js/data.js
