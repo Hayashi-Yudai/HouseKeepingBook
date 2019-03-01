@@ -79,6 +79,7 @@
         <div class="col-md-6 mt-2">
           <h2>支出履歴</h2>
           <table>
+            <thead>
               <tr>
                   <th width="5%">日付</th>
                   <th width="22%">用途</th>
@@ -86,6 +87,8 @@
                   <th width="10%">金額</th>
                   <th width="5%">削除</th>
               </tr>
+            </thead>
+            <tbody>
               {% for m in money %}
               <tr>
                   <td>{{ m.used_date.month }}/{{ m.used_date.day }}</td>
@@ -106,6 +109,7 @@
                   </td>
               </tr>
               {% endfor %}
+            </tbody>
           </table>
         </div>
         <div class="col-md-6 mt-2">

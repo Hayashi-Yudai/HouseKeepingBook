@@ -17,6 +17,16 @@ th,tr:last-child td{
 }
 td,th{
   padding:10px;
+  width: 200px;
+}
+
+thead, tbody {
+  display: block;
+}
+tbody {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 550px;
 }
 
 h2 {
