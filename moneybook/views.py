@@ -107,6 +107,9 @@ class MainView(View):
 
             return redirect(to=f'/{year}/{month}')
 
+        if 'image' in data.keys():
+            return redirect(to=f'/{year}/{month}')
+
     def draw_graph(self, year, month):
         money = ExpenditureDetail.objects.filter(used_date__year=year,
                 used_date__month=month).order_by('used_date')

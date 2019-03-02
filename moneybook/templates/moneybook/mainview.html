@@ -41,7 +41,11 @@
       <div class="row">
         <div class="col-md-6 mt-2">
           <p>
-            <h2>支出の登録</h2>
+            <h2 class="input">支出の登録</h2>
+            <form class="input ml-5", method="post">
+              {% csrf_token %}
+              <input type="submit" name='image' class="btn btn-outline-primary" value="レシートから登録">
+            </form>
           </p>
           <form action="" method="post" autocomplete="off">
             {% csrf_token %}
@@ -68,7 +72,7 @@
             </div>
           </form>
         </div>
-        <div class="col-md-6 mt-5">
+        <div class="col-md-6 mt-3">
           <h2>今月の総支出</h2>
           <div class="text-center total_cost">
             <h3 class="total">{{ total_cost }}円</h2>
