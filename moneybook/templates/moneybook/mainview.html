@@ -4,9 +4,10 @@
   <head>
     <meta charset="utf-8">
     <title>MoneyBook</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'moneybook/main_style.css' %}">
@@ -23,6 +24,7 @@
   </head>
   <body>
     <div class="container">
+      <!-- ヘッダー -->
       <div class="row top-bg">
         <div class="col-md-8 mt-2 mb-3">
           <h1>{{ year }}年　{{ month }}月</h1>
@@ -38,14 +40,15 @@
           </a>
         </div>
       </div>
+
+      <!-- 支出の登録フォーム -->
       <div class="row">
         <div class="col-md-6 mt-2">
           <p>
             <h2 class="input">支出の登録</h2>
-            <form class="input ml-5", method="post">
-              {% csrf_token %}
-              <input type="submit" name='image' class="btn btn-outline-primary" value="レシートから登録">
-            </form>
+            <button type='button' class="btn btn-outline-primary ml-5" data-toggle="modal" data-target="#ReceiptModal">
+              レシートから登録
+            </button>
           </p>
           <form action="" method="post" autocomplete="off">
             {% csrf_token %}
@@ -72,6 +75,8 @@
             </div>
           </form>
         </div>
+
+        <!-- 総支出の表示 -->
         <div class="col-md-6 mt-3">
           <h2>今月の総支出</h2>
           <div class="text-center total_cost">
@@ -79,11 +84,13 @@
           </div>
         </div>
       </div>
+
       <div class="row">
+        <!-- 支出履歴テーブル -->
         <div class="col-md-6 mt-2">
           <h2>支出履歴</h2>
-          <table>
-            <thead class="pay_histry">
+          <table style="table-layout:fixed;width:100%">
+            <thead class="pay_history">
               <tr>
                   <th class="date">日付</th>
                   <th class="use">用途</th>
@@ -92,9 +99,9 @@
                   <th class="delete">削除</th>
               </tr>
             </thead>
-            <tbody class="pay_histry">
+            <tbody class="pay_history">
               {% for m in money %}
-              <tr>
+              <tr class="table_data">
                   <td class="date">{{ m.used_date.month }}/{{ m.used_date.day }}</td>
                   <td class="use">{{ m.money_use }}</td>
                   <td class="category">{{ m.get_category_display }}</td>
@@ -116,6 +123,8 @@
             </tbody>
           </table>
         </div>
+
+        <!-- 支出額の推移グラフ -->
         <div class="col-md-6 mt-2">
           <h2>支出額の推移</h2>
           <canvas id="data"></canvas>
@@ -123,5 +132,31 @@
         </div>
       </div>
     </div>
+
+    <!-- モーダルの設定 -->
+    <div class="modal fade" id="ReceiptModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">レシートのアップロード</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <label class="input-group-btn">
+              <span class="btn btn-primary">
+                Choose File
+                <input type="file" style="display:none">
+              </span>
+            </label>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary">アップロード</button>
+          </div><!-- /.modal-footer -->
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
   </body>
 </html>
