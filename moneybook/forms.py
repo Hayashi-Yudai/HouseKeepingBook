@@ -1,5 +1,6 @@
 from django import forms
 from django.utils import timezone
+from .models import ReceiptImage
 import datetime
 
 
@@ -63,3 +64,11 @@ class ExpenditureForm(forms.Form):
         if used_date > now:
             self.add_error('used_date', '翌日以降の支出は登録できません')
         return used_date
+
+
+class ReceiptForm(forms.ModelForm):
+    image = forms.ImageField()
+
+    class Meta:
+        model = ReceiptImage
+        fields = ('image', )

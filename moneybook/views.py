@@ -5,8 +5,8 @@ import datetime
 import calendar
 
 
-from .forms import ExpenditureForm
-from .models import ExpenditureDetail
+from .forms import ExpenditureForm, ReceiptForm
+from .models import ExpenditureDetail, ReceiptImage
 
 TODAY = str(timezone.now()).split('-')
 # Create your views here.
@@ -33,7 +33,8 @@ class MainView(View):
             'prev_month' : prev_month,
             'total_cost' : total,
             'money' : money,
-            'form' : ExpenditureForm()
+            'form' : ExpenditureForm(),
+            'img_form' : ReceiptForm(),
         }
 
         self.draw_graph(year, month)
@@ -107,7 +108,17 @@ class MainView(View):
 
             return redirect(to=f'/{year}/{month}')
 
-        if 'image' in data.keys():
+        if 'receipt_img' in data.keys():
+            form_cls = ReceiptForm(request.POST, request.FILES, instance=ReceiptImage())
+            """
+            with open('moneybook/static/test.jpg', 'wb+') as destination:
+                for chunk in request.FILES['file'].chunks():
+                    destination.write(chunk)
+            """
+            print(request.FILES)
+            img = form_cls.save()
+            img.save()
+
             return redirect(to=f'/{year}/{month}')
 
     def draw_graph(self, year, month):
