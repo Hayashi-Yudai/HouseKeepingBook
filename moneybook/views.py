@@ -10,6 +10,8 @@ from .models import ExpenditureDetail, ReceiptImage
 
 TODAY = str(timezone.now()).split('-')
 # Create your views here.
+
+
 class MainView(View):
     def get(self, request, year=TODAY[0], month=TODAY[1]):
         money = ExpenditureDetail.objects.filter(
@@ -25,16 +27,16 @@ class MainView(View):
         prev_year, prev_month = get_prev(year, month)
 
         context = {
-            'year' : year,
-            'month' : month,
-            'next_year' : next_year,
-            'next_month' : next_month,
-            'prev_year' : prev_year,
-            'prev_month' : prev_month,
-            'total_cost' : total,
-            'money' : money,
-            'form' : ExpenditureForm(),
-            'img_form' : ReceiptForm(),
+            'year': year,
+            'month': month,
+            'next_year': next_year,
+            'next_month': next_month,
+            'prev_year': prev_year,
+            'prev_month': prev_month,
+            'total_cost': total,
+            'money': money,
+            'form': ExpenditureForm(),
+            'img_form': ReceiptForm(),
         }
 
         self.draw_graph(year, month)
@@ -55,10 +57,10 @@ class MainView(View):
                 used_date = timezone.datetime.strptime(used_date, '%Y-%m-%d')
 
                 ExpenditureDetail.objects.create(
-                    used_date = used_date,
-                    cost = cost,
-                    money_use = money_use,
-                    category = category_choices
+                    used_date=used_date,
+                    cost=cost,
+                    money_use=money_use,
+                    category=category_choices
                 )
 
             money = ExpenditureDetail.objects.filter(
@@ -74,15 +76,15 @@ class MainView(View):
             prev_year, prev_month = get_prev(year, month)
 
             context = {
-                'year' : year,
-                'month' : month,
-                'next_year' : next_year,
-                'next_month' : next_month,
-                'prev_year' : prev_year,
-                'prev_month' : prev_month,
-                'total_cost' : total,
-                'money' : money,
-                'form' : form,
+                'year': year,
+                'month': month,
+                'next_year': next_year,
+                'next_month': next_month,
+                'prev_year': prev_year,
+                'prev_month': prev_month,
+                'total_cost': total,
+                'money': money,
+                'form': form,
             }
 
             self.draw_graph(year, month)
@@ -94,8 +96,8 @@ class MainView(View):
             cost = data['cost']
             money_use = data['money_use']
 
-
-            used_date = used_date.replace('年', '-').replace('月', '-').replace('日', '')
+            used_date = used_date.replace(
+                '年', '-').replace('月', '-').replace('日', '')
             y, m, d = used_date.split('-')
 
             ExpenditureDetail.objects.filter(
@@ -109,21 +111,21 @@ class MainView(View):
             return redirect(to=f'/{year}/{month}')
 
         if 'receipt_img' in data.keys():
-            form_cls = ReceiptForm(request.POST, request.FILES, instance=ReceiptImage())
+            form_cls = ReceiptForm(request.POST, request.FILES)
             """
             with open('moneybook/static/test.jpg', 'wb+') as destination:
                 for chunk in request.FILES['file'].chunks():
                     destination.write(chunk)
             """
-            print(request.FILES)
-            img = form_cls.save()
-            img.save()
+            receipt = ReceiptImage()
+            receipt.img = form_cls['image']
+            receipt.save()
 
             return redirect(to=f'/{year}/{month}')
 
     def draw_graph(self, year, month):
         money = ExpenditureDetail.objects.filter(used_date__year=year,
-                used_date__month=month).order_by('used_date')
+                                                 used_date__month=month).order_by('used_date')
 
         last_day = calendar.monthrange(int(year), int(month))[1] + 1
         day = [i for i in range(1, last_day)]
@@ -181,7 +183,6 @@ class MainView(View):
             f.write(json_template)
 
 
-
 def get_next(year, month):
     year = int(year)
     month = int(month)
@@ -190,6 +191,7 @@ def get_next(year, month):
         return str(year + 1), '1'
     else:
         return str(year), str(month + 1)
+
 
 def get_prev(year, month):
     year = int(year)

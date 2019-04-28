@@ -16,14 +16,15 @@ category_choices = (
     ('others', '雑費'),
 )
 
+
 class ExpenditureForm(forms.Form):
     used_date = forms.DateField(
         widget=forms.TextInput(
             attrs={
-                'class' : 'form-control mr-2',
-                'id' : 'date_choice',
-                'style' : 'width:120px',
-                'placeholder' : '日付',
+                'class': 'form-control mr-2',
+                'id': 'date_choice',
+                'style': 'width:120px',
+                'placeholder': '日付',
             }
         )
     )
@@ -31,9 +32,9 @@ class ExpenditureForm(forms.Form):
     cost = forms.IntegerField(
         widget=forms.TextInput(
             attrs={
-                'class' : 'form-control mr-2',
-                'style' : 'width:80px',
-                'placeholder' : '金額',
+                'class': 'form-control mr-2',
+                'style': 'width:80px',
+                'placeholder': '金額',
             }
         )
     )
@@ -42,9 +43,9 @@ class ExpenditureForm(forms.Form):
         max_length=200,
         widget=forms.TextInput(
             attrs={
-                'class' : 'form-control mr-3',
-                'style' : 'width:400px',
-                'placeholder' : '用途を入力してください',
+                'class': 'form-control mr-3',
+                'style': 'width:400px',
+                'placeholder': '用途を入力してください',
             }
         )
     )
@@ -53,7 +54,7 @@ class ExpenditureForm(forms.Form):
         choices=category_choices,
         widget=forms.Select(
             attrs={
-                'class' : 'form-control'
+                'class': 'form-control'
             }
         )
     )
@@ -66,9 +67,12 @@ class ExpenditureForm(forms.Form):
         return used_date
 
 
-class ReceiptForm(forms.ModelForm):
+class ReceiptForm(forms.Form):
+    image = forms.ImageField()
+    """
     image = forms.ImageField()
 
     class Meta:
         model = ReceiptImage
         fields = ('image', )
+    """
