@@ -1,7 +1,24 @@
 body{
   font-family: Meiryo;
+  overflow-x: hidden;
+  width: 100vw;
+}
+h2 {
+    padding: 0.5% 1.5%;
+    color: #494949;
+    background: transparent;
+    border-left: solid 5px #7db4e6;
+}
+.container {
+    max-width: 90%;
 }
 
+.top-bg{
+    background-color: #b0c4de;
+}
+
+
+/* テーブルレイアウト */
 table.pay_histry{
   table-layout: fixed;
   border-collapse:collapse;
@@ -10,56 +27,61 @@ table.pay_histry{
 th{
   color:#005ab3;
 }
-td.pay_histry{
+td{
   border-bottom:1px dashed #999;
+  word-wrap: break-word;
 }
 th, tr:last-child td{
   border-bottom:2px solid #005ab3;
 }
-td.pay_histry, th.pay_histry{
+td.pay_history, th.pay_history{
   padding:10px;
 }
+tr.table_data{
+  width: 100%;
+  display: flex;
+}
 
+thead.pay_history{
+  width: 100%;
+}
+
+tbody.pay_history {
+  display: block;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 1010%;
+  height: 300px;
+}
+
+/* フォームレイアウト */
 .date{
-  width: 80px;
+  width: 10%;
+  table-layout: fixed;
 }
 .use{
-  width: 400px;
+  width: 40%;
   table-layout: fixed;
 }
 .category{
-  width: 100px;
+  width: 15%;
+  table-layout: fixed;
 }
 .cost{
-  width: 120px;
+  width: 20%;
+  table-layout: fixed;
 }
 .delete{
-  width: 80px;
+  width: 15%;
+  table-layout: fixed;
+}
+.input{
+  display: inline;
+  vertical-align: middle;
+  table-layout: fixed;
 }
 
-thead.pay_histry, tbody.pay_histry {
-  display: block;
-}
-tbody.pay_histry {
-  overflow-x: hidden;
-  overflow-y: scroll;
-  height: 550px;
-}
 
-h2 {
-    padding: 0.25em 0.5em;/*上下 左右の余白*/
-    color: #494949;/*文字色*/
-    background: transparent;/*背景透明に*/
-    border-left: solid 5px #7db4e6;/*左線*/
-}
-
-.container {
-    max-width: 90%;
-}
-
-.top-bg{
-    background-color: #b0c4de;
-}
 
 .total{
   font-size: 2.5em;

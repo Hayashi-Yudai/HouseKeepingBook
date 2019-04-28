@@ -1,4 +1,6 @@
 from django.db import models
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
 
 # Create your models here.
 class ExpenditureDetail(models.Model):
@@ -22,3 +24,7 @@ class ExpenditureDetail(models.Model):
 
     def __str__(self):
         return self.money_use + ' ￥' + str(self.cost)
+
+
+class ReceiptImage(models.Model):
+    img = models.ImageField(upload_to="receipt")
