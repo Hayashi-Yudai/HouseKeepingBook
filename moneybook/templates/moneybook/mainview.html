@@ -46,9 +46,11 @@
         <div class="col-md-6 mt-2">
           <p>
             <h2 class="input">支出の登録</h2>
+            <!--
             <button type='button' class="btn btn-outline-primary ml-5" data-toggle="modal" data-target="#ReceiptModal">
               レシートから登録
             </button>
+          -->
           </p>
           <form action="" method="post" autocomplete="off">
             {% csrf_token %}
@@ -102,11 +104,11 @@
             <tbody class="pay_history">
               {% for m in money %}
               <tr class="table_data">
-                  <td class="date">{{ m.used_date.month }}/{{ m.used_date.day }}</td>
-                  <td class="use">{{ m.money_use }}</td>
-                  <td class="category">{{ m.get_category_display }}</td>
-                  <td class="cost">{{ m.cost }}円</td>
-                  <td class="delete">
+                  <td class="date" id="table">{{ m.used_date.month }}/{{ m.used_date.day }}</td>
+                  <td class="use" id="table">{{ m.money_use }}</td>
+                  <td class="category" id="table">{{ m.get_category_display }}</td>
+                  <td class="cost" id="table">{{ m.cost }}円</td>
+                  <td class="delete" id="table">
                       <form action="" method="post">
                           {% csrf_token %}
                           {{ form_delete.as_table }}
