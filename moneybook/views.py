@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.utils import timezone
 import datetime
@@ -12,7 +13,7 @@ TODAY = str(timezone.now()).split('-')
 # Create your views here.
 
 
-class MainView(View):
+class MainView(LoginRequiredMixin, View):
     def get(self, request, year=TODAY[0], month=TODAY[1]):
         money = ExpenditureDetail.objects.filter(
             used_date__year=year,
