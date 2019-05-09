@@ -1,48 +1,51 @@
-body{
+body {
   font-family: Meiryo;
   overflow-x: hidden;
   width: 100vw;
 }
 h2 {
-    padding: 0.5% 1.5%;
-    color: #494949;
-    background: transparent;
-    border-left: solid 5px #7db4e6;
+  padding: 0.5% 1.5%;
+  color: #494949;
+  background: transparent;
+  border-left: solid 5px #7db4e6;
 }
 .container {
-    max-width: 90%;
+  max-width: 90%;
 }
 
-.top-bg{
-    background-color: #b0c4de;
+.top-bg {
+  background-color: #b0c4de;
 }
-
 
 /* テーブルレイアウト */
-table.pay_histry{
+table.pay_histry {
   table-layout: fixed;
-  border-collapse:collapse;
-  margin:0 0;
+  border-collapse: collapse;
+  margin: 0 0;
 }
-th{
-  color:#005ab3;
+th {
+  color: #005ab3;
 }
-td{
-  border-bottom:1px dashed #999;
+td#table {
+  border-bottom: 1px dashed #999;
   word-wrap: break-word;
+  display: flex;
+  align-items: center;
 }
-th, tr:last-child td{
-  border-bottom:2px solid #005ab3;
+th,
+tr:last-child td {
+  border-bottom: 2px solid #005ab3;
 }
-td.pay_history, th.pay_history{
-  padding:10px;
+td.pay_history,
+th.pay_history {
+  padding: 10px;
 }
-tr.table_data{
+tr.table_data {
   width: 100%;
   display: flex;
 }
 
-thead.pay_history{
+thead.pay_history {
   width: 100%;
 }
 
@@ -55,34 +58,32 @@ tbody.pay_history {
 }
 
 /* フォームレイアウト */
-.date{
+.date {
   width: 10%;
   table-layout: fixed;
 }
-.use{
+.use {
   width: 40%;
   table-layout: fixed;
 }
-.category{
+.category {
   width: 15%;
   table-layout: fixed;
 }
-.cost{
+.cost {
   width: 20%;
   table-layout: fixed;
 }
-.delete{
+.delete {
   width: 15%;
   table-layout: fixed;
 }
-.input{
+.input {
   display: inline;
   vertical-align: middle;
   table-layout: fixed;
 }
 
-
-
-.total{
+.total {
   font-size: 2.5em;
 }
