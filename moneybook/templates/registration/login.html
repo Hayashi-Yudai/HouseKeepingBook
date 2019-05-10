@@ -24,19 +24,13 @@
     <p>Please login to see this page.</p>
     {% endif %} {% endif %}
 
+    <h1>Log In</h1>
     <form method="post" action="{% url 'login' %}">
       {% csrf_token %}
-      <table>
-        <tr>
-          <td>{{ form.username.label_tag }}</td>
-          <td>{{ form.username }}</td>
-        </tr>
-        <tr>
-          <td>{{ form.password.label_tag }}</td>
-          <td>{{ form.password }}</td>
-        </tr>
-      </table>
-
+      <fieldset id="inputs">
+        {{ form.username }}
+        {{ form.password }}
+      </fieldset>
       <input type="submit" value="login" />
       <input
         type="button"

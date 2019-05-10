@@ -14,6 +14,8 @@ TODAY = str(timezone.now()).split('-')
 
 
 class MainView(LoginRequiredMixin, View):
+    login_url = '/login/'
+
     def get(self, request, year=TODAY[0], month=TODAY[1]):
         money = ExpenditureDetail.objects.filter(
             used_date__year=year,
