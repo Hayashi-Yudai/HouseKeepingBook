@@ -32,11 +32,7 @@
         {{ form.password }}
       </fieldset>
       <input type="submit" value="login" />
-      <input
-        type="button"
-        onclick="location.href='/accounts/signup'"
-        value="Sign Up"
-      />
+      <input type="button" onclick="location.href='/signup'" value="Sign Up" />
       <input type="hidden" name="next" value="{{ next }}" />
     </form>
   </body>

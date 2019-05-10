@@ -10,5 +10,6 @@ app_name = 'accounts'
 
 urlpatterns = [
     # ex: /accounts/signup/
+    path('login/', views.Login.as_view(), name='login'),
     path('signup/', views.SignUpView.as_view(), name='signup'),
 ]

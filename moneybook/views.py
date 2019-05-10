@@ -6,8 +6,8 @@ import datetime
 import calendar
 
 
-from .forms import ExpenditureForm, ReceiptForm
 from .models import ExpenditureDetail, ReceiptImage
+from .forms import ExpenditureForm
 
 TODAY = str(timezone.now()).split('-')
 # Create your views here.
@@ -39,7 +39,6 @@ class MainView(LoginRequiredMixin, View):
             'total_cost': total,
             'money': money,
             'form': ExpenditureForm(),
-            'img_form': ReceiptForm(),
         }
 
         self.draw_graph(year, month)
