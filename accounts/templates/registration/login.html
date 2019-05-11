@@ -14,29 +14,20 @@
     </title>
   </head>
   <body>
-    {% if form.errors %}
-    <p>Your username and password didn't match. Please try again.</p>
-    {% endif %} {% if next %} {% if user.is_authenticated %}
-    <p>
-      Your account doesn't have access to this page. To proceed, please login
-      with an account that has access.
-    </p>
-    {% else %}
-    <p>Please login to see this page.</p>
-    {% endif %} {% endif %}
-
-    <form id="login" method="post" action="{% url 'login' %}">
+    <form id="center-panel" method="post" action="{% url 'login' %}">
       <h1>Log In</h1>
       {% csrf_token %}
       <fieldset id="inputs">
         {{ form.username }}
         {{ form.password }}
       </fieldset>
+      {% if form.errors %}
+      <p>ユーザー名またはパスワードが一致しません</p>
+      {% endif %}
       <fieldset id="actions">
         <input type="submit" id="submit" value="login" />
         <a href="/signup">Sign Up</a>
       </fieldset>
-      <input type="hidden" name="next" value="{{ next }}" />
     </form>
   </body>
 </html>

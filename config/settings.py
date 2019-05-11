@@ -90,3 +90,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
+LOGIN_ERROR_URL = ''
+LOGIN_URL = ''
+LOGIN_REDIRECT_URL = '/moneybook'
+LOGOUT_REDIRECT_URL = ''

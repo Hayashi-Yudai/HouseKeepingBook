@@ -3,7 +3,7 @@ body {
   background-color: #d5f1ff;
 }
 
-#login {
+#center-panel {
   background-color: #fff;
   background-image: -webkit-linear-gradient(top, #fff, #eee);
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.2),
@@ -11,7 +11,7 @@ body {
     0 7px 0 rgba(0, 0, 0, 0.2);
 }
 
-#login {
+#center-panel {
   position: absolute;
   z-index: 0;
   height: 240px;
@@ -23,7 +23,7 @@ body {
   border-radius: 3px;
 }
 
-#login:before {
+#center-panel:before {
   content: "";
   position: absolute;
   z-index: -1;

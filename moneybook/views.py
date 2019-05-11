@@ -14,7 +14,8 @@ TODAY = str(timezone.now()).split('-')
 
 
 class MainView(LoginRequiredMixin, View):
-    login_url = '/login/'
+    login_url = '/login'
+    redirect_field_name = ''
 
     def get(self, request, year=TODAY[0], month=TODAY[1]):
         money = ExpenditureDetail.objects.filter(
@@ -109,19 +110,6 @@ class MainView(LoginRequiredMixin, View):
                 cost__iexact=cost,
                 money_use__iexact=money_use
             ).delete()
-
-            return redirect(to=f'/{year}/{month}')
-
-        if 'receipt_img' in data.keys():
-            form_cls = ReceiptForm(request.POST, request.FILES)
-            """
-            with open('moneybook/static/test.jpg', 'wb+') as destination:
-                for chunk in request.FILES['file'].chunks():
-                    destination.write(chunk)
-            """
-            receipt = ReceiptImage()
-            receipt.img = form_cls['image']
-            receipt.save()
 
             return redirect(to=f'/{year}/{month}')
 
