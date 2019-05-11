@@ -6,14 +6,17 @@ import datetime
 import calendar
 
 
-from .forms import ExpenditureForm, ReceiptForm
 from .models import ExpenditureDetail, ReceiptImage
+from .forms import ExpenditureForm
 
 TODAY = str(timezone.now()).split('-')
 # Create your views here.
 
 
 class MainView(LoginRequiredMixin, View):
+    login_url = '/login'
+    redirect_field_name = ''
+
     def get(self, request, year=TODAY[0], month=TODAY[1]):
         money = ExpenditureDetail.objects.filter(
             used_date__year=year,
@@ -37,7 +40,6 @@ class MainView(LoginRequiredMixin, View):
             'total_cost': total,
             'money': money,
             'form': ExpenditureForm(),
-            'img_form': ReceiptForm(),
         }
 
         self.draw_graph(year, month)
@@ -108,19 +110,6 @@ class MainView(LoginRequiredMixin, View):
                 cost__iexact=cost,
                 money_use__iexact=money_use
             ).delete()
-
-            return redirect(to=f'/{year}/{month}')
-
-        if 'receipt_img' in data.keys():
-            form_cls = ReceiptForm(request.POST, request.FILES)
-            """
-            with open('moneybook/static/test.jpg', 'wb+') as destination:
-                for chunk in request.FILES['file'].chunks():
-                    destination.write(chunk)
-            """
-            receipt = ReceiptImage()
-            receipt.img = form_cls['image']
-            receipt.save()
 
             return redirect(to=f'/{year}/{month}')
 

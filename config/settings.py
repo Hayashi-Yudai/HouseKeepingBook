@@ -2,7 +2,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/moneybook'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
@@ -90,3 +90,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
+LOGIN_ERROR_URL = ''
+LOGIN_URL = ''
+LOGIN_REDIRECT_URL = '/moneybook'
+LOGOUT_REDIRECT_URL = ''
