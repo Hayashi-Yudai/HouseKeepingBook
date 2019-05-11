@@ -12,3 +12,4 @@ class LoginForm(AuthenticationForm):
             field.widget.attrs['class'] = 'form-control'
             # placeholderにフィールドのラベルを入れる
             field.widget.attrs['placeholder'] = field.label
+            field.widget.attrs['required'] = 'required'

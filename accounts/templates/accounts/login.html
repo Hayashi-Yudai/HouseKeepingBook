@@ -1,12 +1,13 @@
-{% load staticfiles %}
+{% load static %}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans"
       rel="stylesheet"
+      type="text/css"
+      href="{% static 'accounts/style.css' %}"
     />
     <title>
       Login
@@ -24,15 +25,17 @@
     <p>Please login to see this page.</p>
     {% endif %} {% endif %}
 
-    <h1>Log In</h1>
-    <form method="post" action="{% url 'login' %}">
+    <form id="login" method="post" action="{% url 'login' %}">
+      <h1>Log In</h1>
       {% csrf_token %}
       <fieldset id="inputs">
         {{ form.username }}
         {{ form.password }}
       </fieldset>
-      <input type="submit" value="login" />
-      <input type="button" onclick="location.href='/signup'" value="Sign Up" />
+      <fieldset id="actions">
+        <input type="submit" id="submit" value="login" />
+        <a href="/signup">Sign Up</a>
+      </fieldset>
       <input type="hidden" name="next" value="{{ next }}" />
     </form>
   </body>
