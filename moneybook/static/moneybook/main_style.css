@@ -32,6 +32,9 @@ td#table {
   display: flex;
   align-items: center;
 }
+.pay_history::-webkit-scrollbar {
+  display: none;
+}
 th,
 tr:last-child td {
   border-bottom: 2px solid #005ab3;
@@ -54,7 +57,7 @@ tbody.pay_history {
   overflow-x: hidden;
   overflow-y: scroll;
   width: 1010%;
-  height: 300px;
+  height: 400px;
 }
 
 /* フォームレイアウト */
