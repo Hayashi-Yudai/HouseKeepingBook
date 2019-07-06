@@ -135,29 +135,5 @@
       </div>
     </div>
     <a href='/logout'>LOGOUT</a>
-
-    <!-- モーダルの設定 -->
-    <div class="modal fade" id="ReceiptModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">レシートのアップロード</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <form class="img_form" action="" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="modal-body">
-              {{ img_form.image }}
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <input class="btn btn-primary" type="submit" name="receipt_img" value="Upload">
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
   </body>
 </html>
