@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import (
-    AuthenticationForm
+    AuthenticationForm, UserCreationForm
 )
 
 
@@ -13,3 +13,11 @@ class LoginForm(AuthenticationForm):
             # placeholderにフィールドのラベルを入れる
             field.widget.attrs['placeholder'] = field.label
             field.widget.attrs['required'] = 'required'
+
+
+class SignUpForm(UserCreationForm):
+    def __init__(self, *arg, **kwarg):
+        super().__init__(*arg, **kwarg)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['placeholder'] = field.label

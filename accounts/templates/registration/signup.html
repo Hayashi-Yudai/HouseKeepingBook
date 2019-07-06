@@ -1,12 +1,26 @@
+{% load static %}
 <html>
-  <head> </head>
+  <head>
+    <link
+      rel="stylesheet"
+      href="{% static 'accounts/style.css' %}"
+      type="text/css"
+    />
+  </head>
   <body>
-    <h1>Sign up</h1>
     <section class="common-form">
-      <form method="post">
+      <form id="signup-panel" method="post">
+        <h1>Sign up</h1>
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="submit">Sign up</button>
+        <fieldset id="inputs">
+          {{ form.username }}
+          {{ form.password1 }}
+          {{ form.password2 }}
+        </fieldset>
+        <fieldset id="actions">
+          <button type="submit" id="submit">Sign up</button>
+          <a href="../">Cancel</a>
+        </fieldset>
       </form>
     </section>
   </body>
