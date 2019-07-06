@@ -8,6 +8,7 @@
 ## Features
 
 シンプルデザインの家計簿アプリ
+![ScreenShot](https://github.com/Hayashi-Yudai/HouseKeepingBook/blob/images/main-view.png)
 
 ## Usage
 
