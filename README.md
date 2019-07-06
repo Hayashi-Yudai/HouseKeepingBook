@@ -1,12 +1,13 @@
 # House Keeping Book
+
 ## Requirement
-* Python 3.7.1
-* Django 2.1.2
+
+- Python 3.7.2
+- Django 2.1.2
 
 ## Features
-シンプルデザインの家計簿アプリ 
 
-![snapshot](C:\Users\yudai\Documents\Python\housekeeping-book\snapshot.png)
+シンプルデザインの家計簿アプリ
 
 ## Usage
 
@@ -23,4 +24,4 @@ $ python manage.py migrate
 $ python manage.py runserver
 ```
 
-を実行して、http://127.0.0.1:8000/にアクセスします。
+を実行して、http://127.0.0.1:8000/ にアクセスします。
