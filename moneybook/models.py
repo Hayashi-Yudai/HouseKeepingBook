@@ -3,6 +3,8 @@ from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 
 # Create your models here.
+
+
 class ExpenditureDetail(models.Model):
     category_choices = (
         ('food', '食費'),    # DB値 : 人に読みやすい表示
@@ -17,6 +19,7 @@ class ExpenditureDetail(models.Model):
     )
 
     # データベースの値の項目、1つ1つのデータに対して下の4つの項目が割り当てられる
+    user_id = models.IntegerField()
     used_date = models.DateField()
     cost = models.IntegerField(default=0)
     money_use = models.CharField(max_length=200)

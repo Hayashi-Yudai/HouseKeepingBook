@@ -20,7 +20,8 @@ class MainView(LoginRequiredMixin, View):
     def get(self, request, year=TODAY[0], month=TODAY[1]):
         money = ExpenditureDetail.objects.filter(
             used_date__year=year,
-            used_date__month=month
+            used_date__month=month,
+            user_id=request.user.id
         ).order_by('used_date')
 
         total = 0
@@ -42,7 +43,7 @@ class MainView(LoginRequiredMixin, View):
             'form': ExpenditureForm(),
         }
 
-        self.draw_graph(year, month)
+        self.draw_graph(year, month, request.user.id)
 
         return render(request, 'moneybook/mainview.html', context)
 
@@ -60,6 +61,7 @@ class MainView(LoginRequiredMixin, View):
                 used_date = timezone.datetime.strptime(used_date, '%Y-%m-%d')
 
                 ExpenditureDetail.objects.create(
+                    user_id=request.user.id,
                     used_date=used_date,
                     cost=cost,
                     money_use=money_use,
@@ -68,7 +70,8 @@ class MainView(LoginRequiredMixin, View):
 
             money = ExpenditureDetail.objects.filter(
                 used_date__year=year,
-                used_date__month=month
+                used_date__month=month,
+                user_id=request.user.id
             ).order_by('used_date')
 
             total = 0
@@ -90,7 +93,7 @@ class MainView(LoginRequiredMixin, View):
                 'form': form,
             }
 
-            self.draw_graph(year, month)
+            self.draw_graph(year, month, request.user.id)
 
             return render(request, 'moneybook/mainview.html', context)
 
@@ -113,9 +116,11 @@ class MainView(LoginRequiredMixin, View):
 
             return redirect(to=f'/moneybook/{year}/{month}')
 
-    def draw_graph(self, year, month):
+    def draw_graph(self, year, month, user_id):
         money = ExpenditureDetail.objects.filter(used_date__year=year,
-                                                 used_date__month=month).order_by('used_date')
+                                                 used_date__month=month,
+                                                 user_id=user_id
+                                                 ).order_by('used_date')
 
         last_day = calendar.monthrange(int(year), int(month))[1] + 1
         day = [i for i in range(1, last_day)]
