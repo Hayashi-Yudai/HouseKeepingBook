@@ -14,8 +14,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ReceiptImage',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('img_thumbnail', imagekit.models.fields.ProcessedImageField(upload_to='receipt')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
+                ('img_thumbnail', imagekit.models.fields.ProcessedImageField(
+                    upload_to='receipt')),
             ],
         ),
     ]
