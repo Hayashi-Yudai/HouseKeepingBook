@@ -114,7 +114,7 @@ class MainView(LoginRequiredMixin, View):
                 money_use__iexact=money_use
             ).delete()
 
-            return redirect(to=f'/moneybook/{year}/{month}')
+            return redirect(to='/moneybook/{}/{}'.format(year, month))
 
     def draw_graph(self, year, month, user_id):
         money = ExpenditureDetail.objects.filter(used_date__year=year,
