@@ -5,10 +5,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LOGIN_REDIRECT_URL = '/moneybook'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+ALLOWED_HOST = ['127.0.0.1', '.pythonanywhere.com']
 
 SECRET_KEY = 's#wqvj6_9pz0+j%1z)xkd*r+h8i_xjb%4$(9zrg8k1+xc%(ebe'
 DEBUG = True
-ALLOWED_HOSTS = []
 
 
 # Application definition
