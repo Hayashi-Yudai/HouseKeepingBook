@@ -2,5 +2,5 @@ Django==2.2.3
 django-appconf==1.0.3
 django-imagekit==4.0.2
 pilkit==2.0
-Pillow==6.0.0
+Pillow==6.2.0
 sqlparse==0.3.0
