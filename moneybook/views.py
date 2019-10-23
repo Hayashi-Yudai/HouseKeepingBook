@@ -4,6 +4,7 @@ from django.views import View
 from django.utils import timezone
 import datetime
 import calendar
+import os
 
 
 from .models import ExpenditureDetail, ReceiptImage
@@ -174,7 +175,7 @@ class MainView(LoginRequiredMixin, View):
             }
         }
         """
-        with open('moneybook/static/moneybook/js/data.js', 'w') as f:
+        with open(os.path.dirname(os.path.abspath(__file__)) + '/../static/moneybook/js/data.js', 'w') as f:
             f.write(json_template)
 
 

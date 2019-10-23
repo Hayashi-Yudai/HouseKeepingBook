@@ -7,7 +7,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-ALLOWED_HOST = ['127.0.0.1', '.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'hudai.pythonanywhere.com']
 
 SECRET_KEY = 's#wqvj6_9pz0+j%1z)xkd*r+h8i_xjb%4$(9zrg8k1+xc%(ebe'
 DEBUG = True
@@ -96,3 +96,7 @@ LOGIN_ERROR_URL = ''
 LOGIN_URL = ''
 LOGIN_REDIRECT_URL = '/moneybook'
 LOGOUT_REDIRECT_URL = ''
+
+MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
