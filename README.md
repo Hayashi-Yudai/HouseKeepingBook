@@ -2,8 +2,8 @@
 
 ## Requirement
 
-- Python 3.7.2
-- Django 2.1.2
+- Python 3.7
+- Django 3.0.4
 
 ## Features
 
@@ -39,3 +39,7 @@ $ python manage.py runserver
 ```
 
 を実行して、http://127.0.0.1:8000/ にアクセスします。
+
+## News
+
+- (2020/03/08) Django のバージョンを 3.0.4 にアップグレードしました
