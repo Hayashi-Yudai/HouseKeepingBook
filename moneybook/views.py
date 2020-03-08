@@ -175,7 +175,7 @@ class MainView(LoginRequiredMixin, View):
             }
         }
         """
-        with open(os.path.dirname(os.path.abspath(__file__)) + '/../static/moneybook/js/data.js', 'w') as f:
+        with open(os.path.dirname(os.path.abspath(__file__)) + '/static/moneybook/js/data.js', 'w') as f:
             f.write(json_template)
 
 
