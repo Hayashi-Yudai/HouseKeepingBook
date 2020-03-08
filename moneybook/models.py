@@ -21,7 +21,7 @@ class ExpenditureDetail(models.Model):
     used_date = models.DateField()
     cost = models.IntegerField(default=0)
     money_use = models.CharField(max_length=200)
-    category = models.CharField(max_length=10, choices=category_choices)
+    category = models.CharField(max_length=100, choices=category_choices)
 
     def __str__(self):
         return self.money_use + ' ￥' + str(self.cost)
