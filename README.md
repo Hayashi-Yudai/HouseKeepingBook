@@ -12,6 +12,19 @@
 
 ## Usage
 
+### Dependency
+
+リポジトリに `requirements.txt` と `Pipfile` の両方を置いてあります。Pipenv を使って仮想環境を
+構築する場合には、
+
+```bash
+$ pipenv install
+```
+
+を実行すれば必要なライブラリが入った仮想環境が作成されます。
+
+### Setup
+
 最初にデータベースを作成します。コマンドラインから次のコードを実行します。
 
 ```bash
