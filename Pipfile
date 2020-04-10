@@ -11,7 +11,7 @@ django-imagekit = "==4.0.2"
 pilkit = "==2.0"
 sqlparse = "==0.3.0"
 Django = "==3.0.4"
-Pillow = "==6.2.0"
+Pillow = ">=6.2.2"
 
 [requires]
 python_version = "3.7"
