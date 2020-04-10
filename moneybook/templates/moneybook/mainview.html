@@ -110,7 +110,6 @@
                       <td class="delete" id="table">
                           <form action="" method="post">
                               {% csrf_token %}
-                              {{ form_delete.as_table }}
                               <input type="hidden" name="used_date" value={{ m.used_date }}>
                               <input type="hidden" name="money_use" value={{ m.money_use }}>
                               <input type="hidden" name="cost" value={{ m.cost }}>
