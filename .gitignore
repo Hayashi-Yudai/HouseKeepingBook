@@ -3,3 +3,4 @@ django-env/
 __pycache__
 .venv
 .vscode
+Pipfile.lock
