@@ -3,7 +3,7 @@
 ## Requirement
 
 - Python 3.7
-- Django 3.0.4
+- Django 3.0.7
 
 ## Features
 
