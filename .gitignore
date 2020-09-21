@@ -1,6 +1,6 @@
 django-env/
 *.sqlite3
 moneybook/static/moneybook/js/data.js
-/accounts/__pycache__/
-/config/__pycache__/
-/moneybook/__pycache__/
+__pycache__
+.venv
+Pipfile*
