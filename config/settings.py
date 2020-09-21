@@ -1,4 +1,7 @@
 import os
+import dotenv
+
+dotenv.load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -9,7 +12,7 @@ STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 ALLOWED_HOSTS = ["127.0.0.1", "hudai.pythonanywhere.com"]
 
-SECRET_KEY = "s#wqvj6_9pz0+j%1z)xkd*r+h8i_xjb%4$(9zrg8k1+xc%(ebe"
+SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 
