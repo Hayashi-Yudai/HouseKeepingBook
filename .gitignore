@@ -3,4 +3,5 @@ django-env/
 __pycache__
 .venv
 .vscode
+.env
 Pipfile.lock
