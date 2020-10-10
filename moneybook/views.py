@@ -32,6 +32,8 @@ class MainView(LoginRequiredMixin, View):
         context = {
             "year": year,
             "month": month,
+            "days": [i for i in range(1, 31)],
+            "payments_day": [0 for _ in range(1, 31)],
             "next_year": next_year,
             "next_month": next_month,
             "prev_year": prev_year,
@@ -80,6 +82,8 @@ class MainView(LoginRequiredMixin, View):
             context = {
                 "year": year,
                 "month": month,
+                "days": [i for i in range(1, 31)],
+                "payments_day": [0 for _ in range(1, 31)],
                 "next_year": next_year,
                 "next_month": next_month,
                 "prev_year": prev_year,
