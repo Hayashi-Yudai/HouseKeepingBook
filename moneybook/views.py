@@ -29,11 +29,13 @@ class MainView(LoginRequiredMixin, View):
         next_year, next_month = get_next(year, month)
         prev_year, prev_month = get_prev(year, month)
 
+        days, payments = self.calc_graph_data(year, month, request.user.id)
+
         context = {
             "year": year,
             "month": month,
-            "days": [i for i in range(1, 31)],
-            "payments_day": [0 for _ in range(1, 31)],
+            "days": days,
+            "payments": payments,
             "next_year": next_year,
             "next_month": next_month,
             "prev_year": prev_year,
@@ -42,8 +44,6 @@ class MainView(LoginRequiredMixin, View):
             "money": money,
             "form": ExpenditureForm(),
         }
-
-        self.draw_graph(year, month, request.user.id)
 
         return render(request, "moneybook/mainview.html", context)
 
@@ -79,11 +79,13 @@ class MainView(LoginRequiredMixin, View):
             next_year, next_month = get_next(year, month)
             prev_year, prev_month = get_prev(year, month)
 
+            days, payments = self.calc_graph_data(year, month, request.user.id)
+
             context = {
                 "year": year,
                 "month": month,
-                "days": [i for i in range(1, 31)],
-                "payments_day": [0 for _ in range(1, 31)],
+                "days": days,
+                "payments": payments,
                 "next_year": next_year,
                 "next_month": next_month,
                 "prev_year": prev_year,
@@ -92,8 +94,6 @@ class MainView(LoginRequiredMixin, View):
                 "money": money,
                 "form": form,
             }
-
-            self.draw_graph(year, month, request.user.id)
 
             return render(request, "moneybook/mainview.html", context)
 
@@ -115,7 +115,7 @@ class MainView(LoginRequiredMixin, View):
 
             return redirect(to="/moneybook/{}/{}".format(year, month))
 
-    def draw_graph(self, year, month, user_id):
+    def calc_graph_data(self, year, month, user_id):
         money = ExpenditureDetail.objects.filter(
             used_date__year=year, used_date__month=month, user_id=user_id
         ).order_by("used_date")
@@ -126,64 +126,7 @@ class MainView(LoginRequiredMixin, View):
         for m in money:
             cost[int(str(m.used_date).split("-")[2]) - 1] += int(m.cost)
 
-        text_day = ",".join(list(map(str, day)))
-        text_cost = ",".join(list(map(str, cost)))
-
-        json_template = (
-            """var json = {
-            type: 'bar',
-            data: {
-                labels: [
-        """
-            + str(text_day)
-            + """
-                ],
-                datasets: [{
-                    label: '支出',
-                    data: [
-        """
-            + str(text_cost)
-            + """
-                    ],
-                    borderWidth: 2,
-                    strokeColor: 'rgba(0,0,255,1)',
-                    backgroundColor: 'rgba(0,191,255,0.5)'
-                }]
-            },
-            options: {
-                scales: {
-                    xAxes: [{
-                        ticks: {
-                            beginAtZero:true
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: '日付',
-                            fontsize: 18
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero:true
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: '支出額 (円)',
-                            fontsize: 18
-                        }
-                    }]
-                },
-                responsive: true
-            }
-        }
-        """
-        )
-        with open(
-            os.path.dirname(os.path.abspath(__file__)) + "/static/moneybook/js/data.js",
-            "w",
-        ) as f:
-            f.write(json_template)
-
+        return day, cost
 
 def get_next(year, month):
     year = int(year)
