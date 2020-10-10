@@ -1,7 +1,7 @@
-django-env/
 *.sqlite3
 __pycache__
 .venv
 .vscode
 .env
+.idea
 Pipfile.lock

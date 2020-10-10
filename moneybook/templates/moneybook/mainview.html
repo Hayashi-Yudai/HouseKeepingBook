@@ -1,141 +1,147 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang='ja' dir="ltr">
-  <head>
+<head>
     <meta charset="utf-8">
     <title>MoneyBook</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'moneybook/main_style.css' %}">
-    <script type="text/javascript" src="{% static 'moneybook/js/data.js' %}"></script>
-    <script type="text/javascript" src="{% static 'moneybook/js/draw.js' %}"></script>
     <script>
-      $(function () {
-        let dateFormat = 'yy-mm-dd';
-        $('#date_choice').datepicker({
-        dateFormat: dateFormat
+        $(function () {
+            let dateFormat = 'yy-mm-dd';
+            $('#date_choice').datepicker({
+                dateFormat: dateFormat
+            });
         });
-      });
     </script>
-  </head>
-  <body>
-    <div class="container">
-      <div class="container-inner">
+    <script>
+        let days = {{ days }};
+        let payments = {{ payments }};
+    </script>
+    <script type="text/javascript" src="{% static 'moneybook/js/draw.js' %}" defer></script>
+</head>
+<body>
+<div class="container">
+    <div class="container-inner">
         <!-- ヘッダー -->
         <div class="row top-bg">
-          <div class="col-md-8" >
-            <h1>{{ year }}年　{{ month }}月</h1>
-          </div>
-          <div class="col-md-2 text-center mt-4">
-            <a href="/moneybook/{{ prev_year }}/{{ prev_month }}">
-              <h4> << {{ prev_month }}月</h4>
-            </a>
-          </div>
-          <div class="col-md-2 text-center mt-4">
-            <a href="/moneybook/{{ next_year }}/{{ next_month }}">
-              <h4>{{ next_month }}月 >> </h4>
-            </a>
-          </div>
+            <div class="col-md-8">
+                <h1>{{ year }}年　{{ month }}月</h1>
+            </div>
+            <div class="col-md-2 text-center mt-4">
+                <a href="/moneybook/{{ prev_year }}/{{ prev_month }}">
+                    <h4> << {{ prev_month }}月</h4>
+                </a>
+            </div>
+            <div class="col-md-2 text-center mt-4">
+                <a href="/moneybook/{{ next_year }}/{{ next_month }}">
+                    <h4>{{ next_month }}月 >> </h4>
+                </a>
+            </div>
         </div>
 
         <!-- 支出の登録フォーム -->
         <div class="row">
-          <div class="card">
-            <div class="in-card">
-              <h2>支出の登録</h2>
-              <form action="" method="post" autocomplete="off" style="margin-top:3%;">
-                {% csrf_token %}
-                {% if form.errors %}
-                  {% for errors in form.errors.values %}
-                    {% for error in errors %}
-                      <div class="alert alert-danger" role="alert">
-                        {{ error }}
-                      </div>
-                    {% endfor %}
-                  {% endfor %}
-                {% endif %}
-                <div class="form-group">
-                  <div class="form-inline">
-                    {{ form.used_date }}
-                    {{ form.cost }}
-                    {{ form.category }}
-                  </div>
-                  <hr>
-                  <div class="form-inline">
-                    {{ form.money_use }}
-                    <input type="submit" name='add' class="btn btn-primary" value="登録">
-                  </div>
+            <div class="card">
+                <div class="in-card">
+                    <h2>支出の登録</h2>
+                    <form action="" method="post" autocomplete="off" style="margin-top:3%;">
+                        {% csrf_token %}
+                        {% if form.errors %}
+                            {% for errors in form.errors.values %}
+                                {% for error in errors %}
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
+                        <div class="form-group">
+                            <div class="form-inline">
+                                {{ form.used_date }}
+                                {{ form.cost }}
+                                {{ form.category }}
+                            </div>
+                            <hr>
+                            <div class="form-inline">
+                                {{ form.money_use }}
+                                <input type="submit" name='add' class="btn btn-primary" value="登録">
+                            </div>
+                        </div>
+                    </form>
                 </div>
-              </form>
             </div>
-          </div>
 
-          <!-- 総支出の表示 -->
-          <div class="card">
-            <div class="in-card">
-              <h2>今月の総支出</h2>
-              <div class="text-center total_cost">
-                <h3 class="total">{{ total_cost }}円</h2>
-              </div>
+            <!-- 総支出の表示 -->
+            <div class="card">
+                <div class="in-card">
+                    <h2>今月の総支出</h2>
+                    <div class="text-center total_cost">
+                        <h3 class="total">{{ total_cost }}円</h3>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
 
         <div class="row">
-          <!-- 支出履歴テーブル -->
-          <div class="card">
-            <div class="in-card">
-              <h2>支出履歴</h2>
-              <table style="table-layout:fixed;width:100%;margin-top:20px;">
-                <thead class="pay_history">
-                  <tr>
-                      <th class="date">日付</th>
-                      <th class="use">用途</th>
-                      <th class="category">カテゴリー</th>
-                      <th class="cost">金額</th>
-                      <th class="delete">削除</th>
-                  </tr>
-                </thead>
-                <tbody class="pay_history">
-                  {% for m in money %}
-                  <tr class="table_data">
-                      <td class="date" id="table">{{ m.used_date.month }}/{{ m.used_date.day }}</td>
-                      <td class="use" id="table">{{ m.money_use }}</td>
-                      <td class="category" id="table">{{ m.get_category_display }}</td>
-                      <td class="cost" id="table">{{ m.cost }}円</td>
-                      <td class="delete" id="table">
-                          <form action="" method="post">
-                              {% csrf_token %}
-                              <input type="hidden" name="used_date" value={{ m.used_date }}>
-                              <input type="hidden" name="money_use" value={{ m.money_use }}>
-                              <input type="hidden" name="cost" value={{ m.cost }}>
-                              <button class="btn btn-outline-danger" type="submit" name="delete">
-                                削除
-                              </button>
-                          </form>
-                      </td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
+            <!-- 支出履歴テーブル -->
+            <div class="card">
+                <div class="in-card">
+                    <h2>支出履歴</h2>
+                    <table style="table-layout:fixed;width:100%;margin-top:20px;">
+                        <thead class="pay_history">
+                        <tr>
+                            <th class="date">日付</th>
+                            <th class="use">用途</th>
+                            <th class="category">カテゴリー</th>
+                            <th class="cost">金額</th>
+                            <th class="delete">削除</th>
+                        </tr>
+                        </thead>
+                        <tbody class="pay_history">
+                        {% for m in money %}
+                            <tr class="table_data">
+                                <td class="date" id="table">{{ m.used_date.month }}/{{ m.used_date.day }}</td>
+                                <td class="use" id="table">{{ m.money_use }}</td>
+                                <td class="category" id="table">{{ m.get_category_display }}</td>
+                                <td class="cost" id="table">{{ m.cost }}円</td>
+                                <td class="delete" id="table">
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="used_date" value={{ m.used_date }}>
+                                        <input type="hidden" name="money_use" value={{ m.money_use }}>
+                                        <input type="hidden" name="cost" value={{ m.cost }}>
+                                        <button class="btn btn-outline-danger" type="submit" name="delete">
+                                            削除
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-          </div>
 
-          <!-- 支出額の推移グラフ -->
-          <div class="card">
-            <div class="in-card">
-              <h2>支出額の推移</h2>
-              <canvas id="data"></canvas>
-              <script type="text/javascript" src="{% static 'moneybook/js/draw.js' %}"></script>
+            <!-- 支出額の推移グラフ -->
+            <div class="card">
+                <div class="in-card">
+                    <h2>支出額の推移</h2>
+                    <canvas id="data"></canvas>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-    <a href='/logout'>LOGOUT</a>
-  </body>
+</div>
+<a href='/logout'>LOGOUT</a>
+</body>
 </html>
