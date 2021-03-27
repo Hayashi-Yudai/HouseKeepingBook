@@ -12,7 +12,7 @@ django-appconf = "==1.0.3"
 django-imagekit = "==4.0.2"
 pilkit = "==2.0"
 sqlparse = "==0.3.0"
-Django = "==3.0.7"
+Django = ">=3.1.6"
 Pillow = ">=6.2.2"
 python-dotenv = "*"
 
